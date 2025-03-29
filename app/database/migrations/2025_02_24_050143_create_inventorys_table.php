@@ -23,6 +23,8 @@ class CreateInventorysTable extends Migration
             $table->boolean('confirmed_flag')->default(false); // 確定フラグ
             $table->timestamps(); // 登録日時、更新日時
             $table->softDeletes();
+            $table->unsignedBigInteger('user_id')->after('product_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

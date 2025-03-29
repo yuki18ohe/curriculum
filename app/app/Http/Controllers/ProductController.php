@@ -16,7 +16,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user(); // 現在ログインしているユーザーを取得
+        $products = Product::all(); // すべての商品を取得
+    
+        return view('products.mypage', compact('user', 'products'));
     }
 
     /**
@@ -81,7 +84,7 @@ class ProductController extends Controller
                 }
                 $product->save();
         
-               return redirect()->route('mypage')->with('success', '商品が登録されました！');
+               return redirect()->route('products.index')->with('success', '商品が登録されました！');
     }
 
 
@@ -151,7 +154,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteConfirm($id)
+    {
+    $product = Product::findOrFail($id);
+    return view('products.product_delete_conf', compact('product'));
+    }
+    
+     public function destroy($id)
     {
         $product = Product::where('user_id', Auth::id())->findOrFail($id);
 
@@ -163,6 +172,6 @@ class ProductController extends Controller
     // 商品削除
     $product->delete();
 
-    return redirect()->route('mypage')->with('success', '商品を削除しました！');
+    return redirect()->route('products.index')->with('success', '商品を削除しました！');
     }
 }

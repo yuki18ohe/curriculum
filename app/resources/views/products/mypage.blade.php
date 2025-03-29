@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h2>マイページ</h2>
+    <h2>商品管理ページ</h2>
+
+ 
+
+
     <p>名前: {{ $user->name }}</p>
     <p>メールアドレス: {{ $user->email }}</p>
 

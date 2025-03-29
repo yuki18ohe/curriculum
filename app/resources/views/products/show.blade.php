@@ -12,11 +12,6 @@
     @endif
 
     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary">編集</a>
-    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">削除</button>
-    </form>
-    <a href="{{ route('mypage') }}" class="btn btn-secondary">マイページへ戻る</a>
+    <a href="{{ route('products.delete.confirm', $product->id) }}" class="btn btn-danger">削除</a>
 </div>
 @endsection
